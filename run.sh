@@ -70,10 +70,11 @@ done
 PATH_HOMER_CONFIG=/var/www/html/api/configuration.php
 chmod 775 $PATH_HOMER_CONFIG
 
-# Replace values in template
-perl -p -i -e "s/\{\{ DB_PASS \}\}/$DB_PASS/" $PATH_HOMER_CONFIG
-perl -p -i -e "s/\{\{ DB_HOST \}\}/$DB_HOST/" $PATH_HOMER_CONFIG
-perl -p -i -e "s/\{\{ DB_USER \}\}/$DB_USER/" $PATH_HOMER_CONFIG
+		# Replace values in template
+		perl -p -i -e "s/homer_password/$DB_PASS/" $PATH_HOMER_CONFIG
+		perl -p -i -e "s/127\.0\.0\.1/$DB_HOST/" $PATH_HOMER_CONFIG
+		perl -p -i -e "s/homer_user/$DB_USER/" $PATH_HOMER_CONFIG
+		perl -p -i -e "s/9060/$LISTEN_PORT/" $PATH_KAMAILIO_CFG
 
 # Set Permissions for webapp
 mkdir /var/www/html/api/tmp

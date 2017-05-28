@@ -40,9 +40,9 @@ RUN chmod -R 755 /var/lib/mysql/
 WORKDIR /
 
 # HOMER 5
-RUN git clone --depth 1 https://github.com/sipcapture/homer-api.git /homer-api
-RUN git clone --depth 1 https://github.com/sipcapture/homer-ui.git /homer-ui
-RUN git clone --depth 1 https://github.com/sipcapture/hepgen.js /hepgen && cd /hepgen && npm install
+RUN git clone https://github.com/sipcapture/homer-api.git /homer-api
+RUN git clone https://github.com/sipcapture/homer-ui.git /homer-ui
+RUN git clone https://github.com/sipcapture/hepgen.js /hepgen && cd /hepgen && npm install
 
 RUN chmod -R +x /homer-api/scripts/mysql/*
 RUN cp -R /homer-api/scripts/mysql/. /opt/

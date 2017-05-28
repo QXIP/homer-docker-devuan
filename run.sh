@@ -177,6 +177,8 @@ perl -p -i -e "s/\{\{ DB_PASS \}\}/$DB_PASS/" $PATH_KAMAILIO_CFG
 perl -p -i -e "s/\{\{ DB_HOST \}\}/$DB_HOST/" $PATH_KAMAILIO_CFG
 perl -p -i -e "s/\{\{ DB_USER \}\}/$DB_USER/" $PATH_KAMAILIO_CFG
 
+echo "RUN_KAMAILIO=yes" >> /etc/default/kamailio
+
 # Change kamailio datestamp for sql tables
 # sed -i -e 's/# $var(a) = $var(table) + "_" + $timef(%Y%m%d);/$var(a) = $var(table) + "_" + $timef(%Y%m%d);/' $PATH_KAMAILIO_CFG
 # sed -i -e 's/$var(a) = $var(table) + "_%Y%m%d";/# runscript removed -- $var(a) = $var(table) + "_%Y%m%d";/' $PATH_KAMAILIO_CFG
@@ -196,4 +198,9 @@ a2enmod rewrite
 apachectl start
 
 # It's Homer time!
-$kamailio -f $PATH_KAMAILIO_CFG -DD -E -e
+/etc/init.d/kamailio start
+
+# HEPgen!
+cd /hepgen && npm start && nodejs hepgen.js -c ./config/b2bcall_rtcp.js
+
+tail -f /var/log/*

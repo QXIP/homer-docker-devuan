@@ -62,7 +62,7 @@ RUN echo "deb http://deb.kamailio.org/kamailio jessie main" >> etc/apt/sources.l
 RUN echo "deb-src http://deb.kamailio.org/kamailio jessie main" >> etc/apt/sources.list
 RUN apt-get update -qq && apt-get install -f -yqq kamailio rsyslog kamailio-outbound-modules kamailio-geoip-modules kamailio-sctp-modules kamailio-tls-modules kamailio-websocket-modules kamailio-utils-modules kamailio-mysql-modules kamailio-extra-modules && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://raw.githubusercontent.com/sipcapture/homer-config/master/docker/kamailio/kamailio.cfg -O /etc/kamailio/kamailio.cfg
+RUN wget https://raw.githubusercontent.com/sipcapture/homer-config/master/sipcapture/sipcapture.kamailio -O /etc/kamailio/kamailio.cfg
 RUN chmod 775 /etc/kamailio/kamailio.cfg
 
 RUN ln -s /usr/lib64 /usr/lib/x86_64-linux-gnu/

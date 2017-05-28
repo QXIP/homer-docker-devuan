@@ -70,11 +70,10 @@ done
 PATH_HOMER_CONFIG=/var/www/html/api/configuration.php
 chmod 775 $PATH_HOMER_CONFIG
 
-		# Replace values in template
-		perl -p -i -e "s/homer_password/$DB_PASS/" $PATH_HOMER_CONFIG
-		perl -p -i -e "s/127\.0\.0\.1/$DB_HOST/" $PATH_HOMER_CONFIG
-		perl -p -i -e "s/homer_user/$DB_USER/" $PATH_HOMER_CONFIG
-		perl -p -i -e "s/9060/$LISTEN_PORT/" $PATH_KAMAILIO_CFG
+# Replace values in template
+perl -p -i -e "s/\{\{ DB_PASS \}\}/$DB_PASS/" $PATH_HOMER_CONFIG
+perl -p -i -e "s/\{\{ DB_HOST \}\}/$DB_HOST/" $PATH_HOMER_CONFIG
+perl -p -i -e "s/\{\{ DB_USER \}\}/$DB_USER/" $PATH_HOMER_CONFIG
 
 # Set Permissions for webapp
 mkdir /var/www/html/api/tmp
@@ -173,10 +172,10 @@ awk '/max_while_loops=100/{print $0 RS "mpath=\"//usr/lib/x86_64-linux-gnu/kamai
 mv $PATH_KAMAILIO_CFG.tmp $PATH_KAMAILIO_CFG
 
 # Replace values in template
-perl -p -i -e "s/\{\{ LISTEN_PORT \}\}/$LISTEN_PORT/" $PATH_KAMAILIO_CFG
-perl -p -i -e "s/\{\{ DB_PASS \}\}/$DB_PASS/" $PATH_KAMAILIO_CFG
-perl -p -i -e "s/\{\{ DB_HOST \}\}/$DB_HOST/" $PATH_KAMAILIO_CFG
-perl -p -i -e "s/\{\{ DB_USER \}\}/$DB_USER/" $PATH_KAMAILIO_CFG
+perl -p -i -e "s/homer_password/$DB_PASS/" $PATH_HOMER_CONFIG
+perl -p -i -e "s/127\.0\.0\.1/$DB_HOST/" $PATH_HOMER_CONFIG
+perl -p -i -e "s/homer_user/$DB_USER/" $PATH_HOMER_CONFIG
+perl -p -i -e "s/9060/$LISTEN_PORT/" $PATH_KAMAILIO_CFG
 
 echo "RUN_KAMAILIO=yes" >> /etc/default/kamailio
 

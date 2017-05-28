@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Update and upgrade apt
 RUN apt-get update -qq
 # RUN apt-get upgrade -y
-RUN apt-get install --no-install-recommends --no-install-suggests -yqq ca-certificates apache2 libapache2-mod-php5 php5 php5-ldap php5-cli php5-gd php-pear php5-dev php5-mysql php5-json php-services-json git wget pwgen && rm -rf /var/lib/apt/lists/*
+RUN apt-get install --no-install-recommends --no-install-suggests -yqq ca-certificates apache2 libapache2-mod-php5 php5 php5-ldap php5-cli php5-gd php-pear php5-dev php5-mysql php5-json php-services-json git wget npm pwgen && rm -rf /var/lib/apt/lists/*
 RUN a2enmod php5
 
 # MySQL
@@ -42,6 +42,7 @@ WORKDIR /
 # HOMER 5
 RUN git clone --depth 1 https://github.com/sipcapture/homer-api.git /homer-api
 RUN git clone --depth 1 https://github.com/sipcapture/homer-ui.git /homer-ui
+RUN git clone --depth 1 https://github.com/sipcapture/hepgen.js /hepgen && cd /hepgen && npm install
 
 RUN chmod -R +x /homer-api/scripts/mysql/*
 RUN cp -R /homer-api/scripts/mysql/. /opt/
